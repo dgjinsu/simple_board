@@ -95,17 +95,20 @@ public class BoardController {
 
     @PostMapping("/board/update/{id}")
     public String boardUpdate(@PathVariable("id") Integer id, Board board, Model model, MultipartFile file) throws IOException {
+        //왜 바로 board를 저장하지않고 boardTemp에 옮겨다가 저장할까?
         Board boardTemp = boardService.boardView(id);
 
-        System.out.println(boardTemp.getTitle());
-        System.out.println(boardTemp.getContent());
+        System.out.println("boardTemp.getTitle() = " + boardTemp.getTitle());
+        System.out.println("boardTemp.getContent() = " + boardTemp.getContent());
+        System.out.println("board.getTitle() = " + board.getTitle());
+        System.out.println("board.getContent() = " + board.getContent());
 
-//        boardTemp.setTitle(board.getTitle());
-//        boardTemp.setContent(board.getContent());
+        boardTemp.setTitle(board.getTitle());
+        boardTemp.setContent(board.getContent());
 
 
         //수정했던 Board값을 받아와서 재작성
-        boardService.boardwrite(boardTemp, file);
+        boardService.boardwrite(board, file);
 
         model.addAttribute("message", "수정이 완료되었습니다");
         model.addAttribute("searchUrl", "/board/list");

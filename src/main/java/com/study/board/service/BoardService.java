@@ -34,6 +34,7 @@ public class BoardService {
 
         //빈 껍데기파일을 projectPath경로에 name이란 이름으로 저장
         File saveFile = new File(projectPath, fileName);
+        //업로드한 file데이터를 빈 껍데기였던 saveFile에 저장한다.
         file.transferTo(saveFile);
 
         board.setFilename(fileName);
